@@ -1,0 +1,95 @@
+/* This stylesheet is used to style the public-facing components of the plugin. */
+
+// Mimic some BuddyPress Docs styles.
+// Archive/Docs Directory styling
+.docs-filter-section {
+	a.tags-spanning-button,
+	a.tags-spanning-button:visited {
+		display: inline;
+		line-height: 3em;
+		text-decoration: none;
+		background: #fff;
+		background-opacity: .5;
+		padding: 5px 10px;
+		border-radius: 3px;
+	}
+	.and-x-more {
+		white-space: nowrap;
+	}
+	ul.term-filter-links {
+		list-style-type: none;
+		margin-bottom: 0;
+		padding: 0;
+		column-count: 2;
+		column-gap: 10%;
+
+		li {
+			margin-left: 0;
+
+			&.hidden-tag {
+				display: none;
+			}
+
+			&.tags-ellipses {
+				font-style: italic;
+			}
+		}
+	}
+}
+
+// Edit screen styles
+.doc-content {
+	.bpdt-term-select {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		li {
+			margin-left: 0
+		}
+		.children {
+			list-style-type: none;
+			padding: 0 0 0 1em;
+		}
+	}
+}
+
+// BP Legacy
+#buddypress {
+	.bpdt-term-select {
+		label {
+			font-weight: 400;
+			margin: 0;
+		}
+	}
+}
+
+//Media query for most screens, unseen by IE 7 or 8
+@media screen and (min-width:4em) {
+	.docs-filter-section {
+		a.tags-spanning-button,
+		a.tags-spanning-button:visited {
+			display: block; // Let the button span the entire box
+			margin-bottom: 1em;
+			padding: 0;
+			text-align: center;
+		}
+	}
+}
+
+//Media query for larger screens, like tablet
+@media screen and (min-width:50em) {
+	.docs-filter-section {
+		ul.term-filter-links {
+			column-count: 4;
+			column-gap: 5%;
+		}
+	}
+}
+//Media query for larger screens, like desktop
+@media screen and (min-width:71em) {
+	.docs-filter-section {
+		ul.term-filter-links {
+			column-count: 5;
+		}
+	}
+}
