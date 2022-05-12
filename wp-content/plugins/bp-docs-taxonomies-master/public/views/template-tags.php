@@ -140,6 +140,27 @@ function bpdt_terms_metaboxes( $doc_id ) {
 									wp_terms_checklist( $doc_id, $checklist_args );
 									?>
 								</ul>
+								<?php
+									$terms = get_terms( array(
+                                        'taxonomy' => $tax_name,
+                                        'parent' => 0,
+										'hide_empty' => false,
+                                    ) );
+								?>
+								 <select id='parent-<?php echo $tax_name; ?>'>
+                                            <option selected disabled>Aucun</option>
+                                            <?php
+                                                foreach($terms as $term){
+                                                    echo '<option value='. $term->term_id.'>'. $term->name.'</option>';
+                                                }
+                                             ?>
+                            	</select>
+								<select id='child-<?php echo $tax_name; ?>'>
+									<option selected disabled>Aucun</option>
+								</select>
+
+									
+
 							</td>
 						</tr>
 					</table>

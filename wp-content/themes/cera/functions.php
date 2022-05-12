@@ -1619,5 +1619,36 @@ if ( class_exists( 'Grimlock_Login' ) ) {
  *
  * @link https://doc.themosaurus.com/creating-child-theme/
  */
-/*----------------------------------------------------------------------------*/
+/*------------------------------------docs select----------------------------------------*/
+function ajax_script_docs(){
+	wp_localize_script( 'docs_select_script', 'select_docs_ajax_url' , ['ajax_url' => admin_url( 'admin-ajax.php' )] );
+//trans_select_script
+wp_enqueue_script('docs_select_script', get_theme_file_uri() . '/assets/js/filter_docs.js', array( 'jquery' ), '1.0.0', true );
+}
+add_action( 'wp_enqueue_scripts', 'ajax_script_docs' );
+//filter docs actions
+add_action( 'wp_ajax_select_docs', 'select_docs' ); //connecté a dashboard
+add_action( 'wp_ajax_nopriv_select_docs', 'select_docs' ); //pubic
 
+
+/*--------------------select_docs function------------------------*/
+
+function select_docs(){
+	  $parent_id = $_POST['parent_id'];
+  
+	  $taxonomy = "theme_doc";
+
+	  $data = array();
+
+	  $termchildren = get_term_children( $parent_id, $taxonomy );
+
+	  foreach ( $termchildren as $child ) {
+
+		$term = get_term_by( 'id', $child, $taxonomy );
+		$data []= array('name'=>$term->name ,'id'=>$term->term_id);
+	  }
+	  
+	  /* -----------end fiche card---------------*/
+	  echo json_encode(array('data'=>$data));
+  
+  }
